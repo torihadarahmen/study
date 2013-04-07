@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<title>すろっとましーん</title>
+	</head>
+	<body>
+		<h1>すろっとましーん</h1>	
+		<span id="spin_0" >0</span> <input type="button" value="stop" onclick="stop()";>
+		<span id="spin_1" >0</span> <input type="button" value="stop" onclick="stop()";>
+		<span id="spin_2" >0</span> <input type="button" value="stop" onclick="stop()";><br>
+		<input type="button" value="もう一回やりたいんです" onclick="restart()";>
+		
+		<script>
+			var i = 0;
+			var r = [];
+			var timerId;
+			function spin() {
+				console.log(i);
+				document.getElementById("spin_"+i).innerHTML = Math.floor(Math.random() * 10);
+				setTimeout(spin, 100);
+			}
+			spin();
+
+			function stop() {
+				r[i] = document.getElementById("spin_"+i).innerHTML;
+				i++;
+				if (i > 2) {
+					clearTimeout(timerId);
+					console.log(r);
+					r.sort();
+					if (r[0] == r[1] && r[0] == r[2]) {
+						alert("3!!!!!!");
+					} else if (r[0] == r[1] || r[1] == r[2]) {
+						alert("2");	
+					} else {
+						alert("no");
+					}
+				}
+			}//function stop()
+
+			function restart() {
+				i = 0;
+				r =[];
+				spin();
+			}
+
+		</script>
+
+	</body>
+</html>
+
